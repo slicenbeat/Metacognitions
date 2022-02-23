@@ -9,9 +9,10 @@
   <button
     class="authorization-form__submit-button"
     mat-raised-button color="accent"
+    [class._disabled]="!formGroup.valid"
     (click)="onClick()"
-  >Войти
-  </button>
+    [textContent]="'Войти'"
+  ></button>
 
   <a class="authorization-form__registration-link" href="">Еще не зарегистрированы?</a>
 </form>
