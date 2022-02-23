@@ -27,9 +27,8 @@ export class AuthorizationFormComponent implements OnInit {
 
   onClick() {
     if (!this.formGroup.valid) {
-      alert('Форма невалидна')
+      console.log('Форма невалидна')
     }
-
   }
 }
 
