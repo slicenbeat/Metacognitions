@@ -1,0 +1,18 @@
+<form class="registration-form" [formGroup]="formGroup">
+  <h3 class="registration-form__title">Регистрация</h3>
+
+  <div class="registration-form__inputs-block">
+    <input formControlName="login" placeholder="Логин" type="text"/>
+    <input formControlName="password" placeholder="Пароль" type="password"/>
+    <input formControlName="repeatPassword" placeholder="Повторите пароль" type="password"/>
+  </div>
+
+  <button
+    class="registration-form__submit-button"
+    mat-raised-button color="accent"
+    [class._disabled]="!formGroup.valid"
+    [textContent]="'Зарегистрироваться'"
+  ></button>
+
+  <a class="registration-form__authorization-link" href="">Уже зарегистрированы?</a>
+</form>

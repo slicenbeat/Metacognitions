@@ -8,15 +8,18 @@ import {
 } from "./registration-and-authorization-page/registration-and-authorization-page.component";
 import {AuthorizationFormComponent} from "./authorization-form/authorization-form.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {RegistrationFormComponent} from "./registration-form/registration-form.component";
 
 @NgModule({
   declarations: [
     RegistrationAndAuthorizationPageComponent,
-    AuthorizationFormComponent
+    AuthorizationFormComponent,
+    RegistrationFormComponent
   ],
   exports: [
     RegistrationAndAuthorizationPageComponent,
-    AuthorizationFormComponent
+    AuthorizationFormComponent,
+    RegistrationFormComponent
   ],
     imports: [
         BrowserModule,
