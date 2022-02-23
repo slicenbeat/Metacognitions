@@ -1,0 +1,17 @@
+<form class="authorization-form" [formGroup]="formGroup">
+  <h3 class="authorization-form__title">Авторизация</h3>
+
+  <div class="authorization-form__inputs-block">
+    <input formControlName="login" placeholder="Логин" type="text"/>
+    <input formControlName="password" placeholder="Пароль" type="password"/>
+  </div>
+
+  <button
+    class="authorization-form__submit-button"
+    mat-raised-button color="accent"
+    (click)="onClick()"
+  >Войти
+  </button>
+
+  <a class="authorization-form__registration-link" href="">Еще не зарегистрированы?</a>
+</form>
