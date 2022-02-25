@@ -29,5 +29,5 @@ import {RegistrationFormComponent} from "./registration-form/registration-form.c
         ReactiveFormsModule
     ]
 })
-export class ComponentsModule {
+export class RegistrationAndAuthorizationComponentsModule {
 }

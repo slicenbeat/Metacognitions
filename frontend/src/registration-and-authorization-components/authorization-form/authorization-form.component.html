@@ -11,8 +11,8 @@
     mat-raised-button color="accent"
     [class._disabled]="!formGroup.valid"
     (click)="onClick()"
-    [textContent]="'Войти'"
-  ></button>
+    [textContent]="'Войти'">
+  </button>
 
-  <a class="authorization-form__registration-link" href="">Еще не зарегистрированы?</a>
+  <a class="authorization-form__registration-link" routerLink="/registration">Еще не зарегистрированы?</a>
 </form>

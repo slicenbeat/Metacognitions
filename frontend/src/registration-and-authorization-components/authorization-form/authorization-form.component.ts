@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'authorization-form',
@@ -7,17 +8,15 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./authorization-form.component.less']
 })
 export class AuthorizationFormComponent implements OnInit {
-  private login: string = '';
-  private password: string = '';
   formGroup!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, public router: Router) {
     this._createForm();
   }
 
   private _createForm() {
     this.formGroup = this.formBuilder.group({
-      login: ['', [Validators.required]],
+      login: ['', [Validators.required, Validators.email]],
       password: ['',[Validators.required]]
     })
   }

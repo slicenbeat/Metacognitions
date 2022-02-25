@@ -7,9 +7,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./registration-form.component.less']
 })
 export class RegistrationFormComponent implements OnInit {
-  private login: string = '';
-  private password: string = '';
-  private repeatPassword: string = '';
   formGroup!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
@@ -18,7 +15,7 @@ export class RegistrationFormComponent implements OnInit {
 
   private _createForm() {
     this.formGroup = this.formBuilder.group({
-      login: ['', [Validators.required]],
+      login: ['', [Validators.required, Validators.email]],
       password: ['',[Validators.required]],
       repeatPassword: ['',[Validators.required]]
     })
