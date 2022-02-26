@@ -1,0 +1,16 @@
+<div class="header">
+  <div class="header__label">Metacognitions</div>
+  <div class="header__button">Выйти</div>
+</div>
+
+<div class="main-block">
+  <div class="create-record-block"
+       [class.create-record-card-opened]="isCreateRecordComponentVisible"
+       (click)="_showCreateRecordComponent()">
+    <div *ngIf="!isCreateRecordComponentVisible"
+         class="create-record-block__button">Внести новую запись
+    </div>
+    <create-record-component *ngIf="isCreateRecordComponentVisible">
+    </create-record-component>
+  </div>
+</div>
