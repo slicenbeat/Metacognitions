@@ -1,7 +1,6 @@
 .record {
-  margin: 20px; //нужно потом удалить
-  width: 1320px;
-  height: 468px;
+  width:100%;
+  height: max-content;
   background: #FFFFFF;
   border: 1px solid #919ACC;
   box-sizing: border-box;
@@ -13,8 +12,9 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 20%;
+    height: 110px;
     position: relative;
+    padding-bottom: 20px;
 
     &__date {
       font-family: Montserrat;
@@ -33,6 +33,87 @@
           padding-right: 25px;
         }
         cursor: pointer;
+      }
+    }
+  }
+
+  &__info-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+    padding: 0 25px;
+
+
+    &__situation {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 51px;
+
+      &-title {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 29px;
+        margin-right: 44px;
+      }
+
+      &__info {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: lighter;
+        font-size: 24px;
+        line-height: 29px;
+      }
+    }
+
+    &__thoughts {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 51px;
+
+      &-title {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 29px;
+        margin-right: 77px;
+      }
+
+      &__info {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: lighter;
+        font-size: 24px;
+        line-height: 29px;
+      }
+    }
+
+    &__emotions {
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 56px;
+
+      &-title {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 29px;
+        margin-right: 64px;
+      }
+
+      &-block {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        & emotion {
+          margin: 0 36px 15px 0;
+        }
+
       }
     }
   }

@@ -34,16 +34,16 @@
 }
 
 .main-block {
-  width: 100%;
+  height: 100%;
+  padding: 52px 55px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  background-color: #F6FAFF;
 }
 
 .create-record-block {
-  margin-right: 26%;
   width: 70%;
   height: 92px;
-  margin-top: 52px;
 
   background: #FFFFFF;
   border: 1px solid #919ACC;
@@ -52,7 +52,7 @@
 
   &.create-record-card-opened {
     margin-right: 0;
-    width: 92%;
+    width: 100%;
     height: 845px;
   }
 
@@ -62,8 +62,7 @@
       cursor: pointer;
     }
 
-    margin-left: 45px;
-    margin-top: 30px;
+    padding: 30px 45px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
@@ -71,5 +70,27 @@
     line-height: 33px;
 
     color: #3F3A3A;
+  }
+}
+
+.records-settings-block {
+  margin: 52px 0;
+
+  &__title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 43px;
+  }
+
+  &__info {
+    & .record {
+      margin-bottom: 52px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
   }
 }
