@@ -1,4 +1,5 @@
 import {Component, Input} from "@angular/core";
+import {RecordModel} from "../app/models/record.model";
 
 @Component({
   selector: 'record',
@@ -6,19 +7,8 @@ import {Component, Input} from "@angular/core";
   styleUrls: ['./record.component.less']
 })
 export class RecordComponent {
-  @Input() date: string = '22.02.2022';
-
-  emotions: any = [
-    {name: 'Радость'},
-    {name: 'Восторг'},
-    {name: 'Шок'},
-    {name: 'Разочарование'},
-    {name: 'Грусть'},
-    {name: 'Печаль'},
-    {name: 'Желание умереть'},
-    {name: 'Муки совести'},
-    {name: 'Тцос'}
-  ]
+  @Input()
+  public record!: RecordModel;
 
   onEdit():void {
     console.log('редактируй')

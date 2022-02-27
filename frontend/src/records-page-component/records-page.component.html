@@ -18,8 +18,9 @@
   </div>
   <div class="records-settings-block__info">
     <div>
-      <record></record>
-      <record></record>
+      <ng-container *ngFor="let record of records">
+        <record [record]="record"></record>
+      </ng-container>
     </div>
   </div>
 </div>
