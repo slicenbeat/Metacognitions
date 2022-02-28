@@ -13,6 +13,7 @@ export class CreateRecordComponent {
   public emotions!: EmotionModel[];
   public date: Date | null = null;
   public maxDate!: Date;
+  public isVisiblePopup: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
     this._createForm();
@@ -38,5 +39,13 @@ export class CreateRecordComponent {
 
   public _onDateChange(event: MatDatepickerInputEvent<Date>): void {
     this.date = event.value;
+  }
+
+  public onPlusButtonClick():void {
+    this.isVisiblePopup = true;
+  }
+
+  public onClosePopup(event: any):void {
+    this.isVisiblePopup = event;
   }
 }
