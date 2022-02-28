@@ -1,4 +1,4 @@
-<div class="emotions-popup__container">
+<div class="emotions-popup__container" *ngIf="isVisible">
   <div class="emotions-popup__container__info-block">
     <svg (click)="onClose()" class="emotions-popup__container__info-block__close-icon" width="41" height="41"
          viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">

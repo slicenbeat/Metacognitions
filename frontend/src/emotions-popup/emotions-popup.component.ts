@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 
 @Component({
   selector: 'emotions-popup',
@@ -6,6 +6,9 @@ import {Component} from "@angular/core";
   styleUrls: ['./emotions-popup.component.less']
 })
 export class EmotionsPopupComponent {
+
+  @Input() public isVisible: boolean = false;
+  @Output() emitter = new EventEmitter<boolean>();
 
   public emotionList = [
     {
@@ -53,7 +56,8 @@ export class EmotionsPopupComponent {
   }
 
   onClose():void {
-
+    this.isVisible = false;
+    this.emitter.emit(this.isVisible);
   }
 
   onSelectEmotion(event: Event, emotion: string){
