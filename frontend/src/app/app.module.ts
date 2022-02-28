@@ -13,6 +13,7 @@ import {RegistrationFormComponent} from "../registration-and-authorization-compo
 import {RegistrationAndAuthorizationPageComponent} from "../registration-and-authorization-components/registration-and-authorization-page/registration-and-authorization-page.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CreateRecordComponent} from "../create-record-component/create-record.component";
+import {EmotionsPopupComponent} from "../emotions-popup/emotions-popup.component";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {CreateRecordComponent} from "../create-record-component/create-record.co
     RegistrationFormComponent,
     AuthorizationFormComponent,
     RegistrationAndAuthorizationPageComponent,
-    CreateRecordComponent
+    CreateRecordComponent,
+    EmotionsPopupComponent
   ],
   imports: [
     BrowserModule,
