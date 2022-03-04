@@ -7,11 +7,16 @@
     <input formControlName="repeatPassword" placeholder="Повторите пароль" type="password"/>
   </div>
 
+  <div class="registration-form__inline-error"
+  *ngIf="!_isPasswordsTheSame() || authErrorMessageVisible">{{errorMessage}}</div>
+
   <button
+    #regButton
     class="registration-form__submit-button"
     mat-raised-button color="primary"
-    [class._disabled]="!formGroup.valid"
-    [textContent]="'Зарегистрироваться'">
+    [disabled]="!formGroup.valid || !_isPasswordsTheSame()"
+    [textContent]="'Зарегистрироваться'"
+    (click)="_onSubmitForm()">
   </button>
 
   <a class="registration-form__authorization-link" routerLink="/">Уже зарегистрированы?</a>

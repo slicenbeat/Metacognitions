@@ -4,6 +4,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   exports: [
@@ -11,7 +12,8 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatFormFieldModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
   ],
   providers: []
 })

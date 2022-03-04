@@ -14,6 +14,8 @@ import {RegistrationAndAuthorizationPageComponent} from "../registration-and-aut
 import {ReactiveFormsModule} from "@angular/forms";
 import {CreateRecordComponent} from "../create-record-component/create-record.component";
 import {EmotionsPopupComponent} from "../emotions-popup/emotions-popup.component";
+import {AuthService} from "./services/auth.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,12 @@ import {EmotionsPopupComponent} from "../emotions-popup/emotions-popup.component
     BrowserAnimationsModule,
     MaterialModule,
     RecordModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers: [
+    AuthService,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })
