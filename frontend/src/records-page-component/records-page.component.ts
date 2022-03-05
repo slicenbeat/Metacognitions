@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {RecordModel} from "../app/models/record.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'records-page',
@@ -42,10 +43,15 @@ export class RecordsPageComponent {
     }
   ];
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   public _showCreateRecordComponent(): void {
     this.isCreateRecordComponentVisible = true;
+  }
+
+  public _logOut(): void {
+    localStorage.removeItem('auth-token');
+    this.router.navigateByUrl('/');
   }
 }
