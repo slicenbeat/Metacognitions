@@ -37,8 +37,8 @@
     </div>
 
     <div class="record__emotions-block">
-      <ng-container *ngFor="let emotion of emotions">
-        <emotion [emotionName]="emotion.name"></emotion>
+      <ng-container *ngFor="let emotion of selectedEmotions">
+        <emotion [emotionName]="emotion"></emotion>
       </ng-container>
     </div>
 
@@ -47,9 +47,9 @@
   <button
     class="save-button"
     mat-raised-button color="primary"
-    [class._disabled]="!formGroup.valid || !date"
+    [disabled]="!formGroup.valid || !date || !selectedEmotions.length"
     [textContent]="'Сохранить запись'">
   </button>
 </form>
 
-<emotions-popup [isVisible]="isVisiblePopup" (emitter)="onClosePopup($event)"></emotions-popup>
+<emotions-popup [isVisible]="isVisiblePopup" (closePopup)="onClosePopup($event)" (sendingEmotions)="getSelectedEmotions($event)"></emotions-popup>

@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {EmotionModel} from "../app/models/emotion.model";
 import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 @Component({
@@ -10,23 +9,13 @@ import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 })
 export class CreateRecordComponent {
   public formGroup!: FormGroup;
-  public emotions!: EmotionModel[];
   public date: Date | null = null;
   public maxDate!: Date;
   public isVisiblePopup: boolean = false;
+  public selectedEmotions!: Array<string>;
 
   constructor(private formBuilder: FormBuilder) {
     this._createForm();
-    this.emotions = [
-      {name: 'Радость'},
-      {name: 'Восторг'},
-      {name: 'Шок'},
-      {name: 'Разочарование'},
-      {name: 'Грусть'},
-      {name: 'Печаль'},
-      {name: 'Желание умереть'},
-      {name: 'Муки совести'}
-    ];
     this.maxDate = new Date();
   }
 
@@ -45,7 +34,12 @@ export class CreateRecordComponent {
     this.isVisiblePopup = true;
   }
 
-  public onClosePopup(event: any):void {
+  public onClosePopup(event: boolean):void {
     this.isVisiblePopup = event;
+  }
+
+  public getSelectedEmotions(event: Array<string>):void {
+    this.selectedEmotions = event;
+    console.log(this.selectedEmotions);
   }
 }
