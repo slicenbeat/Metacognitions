@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {emotionsArray} from "./emotions";
 
 @Component({
   selector: 'emotions-popup',
@@ -8,46 +9,12 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 export class EmotionsPopupComponent {
 
   @Input() public isVisible: boolean = false;
-  @Output() emitter = new EventEmitter<boolean>();
+  @Output() closePopup = new EventEmitter<boolean>();
+  @Output() sendingEmotions = new EventEmitter<Array<string>>();
 
-  public emotionList = [
-    {
-      groupName: 'Радость',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-    {
-      groupName: 'Грусть',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-    {
-      groupName: 'Гнев',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-    {
-      groupName: 'Гнев',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-    {
-      groupName: 'Гнев',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-    {
-      groupName: 'Гнев',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-    {
-      groupName: 'Гнев',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-    {
-      groupName: 'Гнев',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-    {
-      groupName: 'Гнев',
-      emotions: ["Счастье","Счастье","Счастье","Счастье"]
-    },
-  ]
+  public emotionsList: Array<any> = emotionsArray;
+  public selectedEmotions: Array<string> = new Array<string>();
+
   constructor() {
   }
 
@@ -57,15 +24,22 @@ export class EmotionsPopupComponent {
 
   onClose():void {
     this.isVisible = false;
-    this.emitter.emit(this.isVisible);
+    this.closePopup.emit(this.isVisible);
   }
 
   onSelectEmotion(event: Event, emotion: string){
-    console.log(event)
-    console.log(emotion)
+    if (!this.selectedEmotions.includes(emotion)) {
+      this.selectedEmotions.push(emotion);
+    }
+    else {
+      this.selectedEmotions = this.selectedEmotions.filter((element) => element !== emotion);
+    }
   }
 
   onSave():void {
-
+    this.isVisible = false;
+    this.sendingEmotions.emit((this.selectedEmotions));
+    this.closePopup.emit(this.isVisible);
+    console.log(this.selectedEmotions)
   }
 }

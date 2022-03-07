@@ -18,10 +18,8 @@
     <div class="records-settings-block__title">Все записи</div>
   </div>
   <div class="records-settings-block__info">
-    <div>
       <ng-container *ngFor="let record of records">
-        <record [record]="record"></record>
+        <record class="records-settings-block__info record"[record]="record"></record>
       </ng-container>
-    </div>
   </div>
 </div>

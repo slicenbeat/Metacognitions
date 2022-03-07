@@ -6,14 +6,74 @@
         d="M40.5201 4.75721L36.3416 0.588942L20.7151 16.2538L6.09029 1.6649L1.62557 6.14059L16.2504 20.7295L0.623847 36.3944L4.80236 40.5627L20.4289 24.8978L35.0537 39.4867L39.5184 35.0111L24.8936 20.4221L40.5201 4.75721Z"
         fill="#919ACC"/>
     </svg>
-    <div class="emotions-popup__container__info-block__emotion-group" *ngFor="let emotionGroup of emotionList">
-      <h2 class="emotions-popup__container__info-block__emotion-group__title">{{emotionGroup.groupName}}</h2>
-      <div class="emotions-popup__container__info-block__emotion-group__emotions">
-        <div class="emotions-popup__container__info-block__emotion-group__emotions__emotion"*ngFor="let emotion of emotionGroup.emotions">
-          <label><input (change)="onSelectEmotion($event, emotion)" type="checkbox">{{emotion}}</label>
+    <div class="scroll-block">
+      <div class="emotions-popup__container__info-block__emotions-container">
+        <div class="emotions-popup__container__info-block__emotion-group">
+          <h2
+            class="emotions-popup__container__info-block__emotion-group__title">{{emotionsList[0].emotionsGroupName}}</h2>
+          <div class="emotions-popup__container__info-block__emotion-group__emotions">
+            <div class="emotions-popup__container__info-block__emotion-group__emotions__emotion"
+                 *ngFor="let emotion of emotionsList[0].emotions">
+              <label><input [checked]="selectedEmotions.includes(emotion)" (change)="onSelectEmotion($event, emotion)" type="checkbox">{{emotion}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="emotions-popup__container__info-block__emotion-group">
+          <h2
+            class="emotions-popup__container__info-block__emotion-group__title">{{emotionsList[1].emotionsGroupName}}</h2>
+          <div class="emotions-popup__container__info-block__emotion-group__emotions">
+            <div class="emotions-popup__container__info-block__emotion-group__emotions__emotion"
+                 *ngFor="let emotion of emotionsList[1].emotions">
+              <label><input [checked]="selectedEmotions.includes(emotion)" (change)="onSelectEmotion($event, emotion)" type="checkbox">{{emotion}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="emotions-popup__container__info-block__emotions-container">
+        <div class="emotions-popup__container__info-block__emotion-group">
+          <h2
+            class="emotions-popup__container__info-block__emotion-group__title">{{emotionsList[2].emotionsGroupName}}</h2>
+          <div class="emotions-popup__container__info-block__emotion-group__emotions">
+            <div class="emotions-popup__container__info-block__emotion-group__emotions__emotion"
+                 *ngFor="let emotion of emotionsList[2].emotions">
+              <label><input [checked]="selectedEmotions.includes(emotion)" (change)="onSelectEmotion($event, emotion)" type="checkbox">{{emotion}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="emotions-popup__container__info-block__emotion-group">
+          <h2
+            class="emotions-popup__container__info-block__emotion-group__title">{{emotionsList[3].emotionsGroupName}}</h2>
+          <div class="emotions-popup__container__info-block__emotion-group__emotions">
+            <div class="emotions-popup__container__info-block__emotion-group__emotions__emotion"
+                 *ngFor="let emotion of emotionsList[3].emotions">
+              <label><input [checked]="selectedEmotions.includes(emotion)" (change)="onSelectEmotion($event, emotion)" type="checkbox">{{emotion}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="emotions-popup__container__info-block__emotions-container">
+        <div class="emotions-popup__container__info-block__emotion-group">
+          <h2
+            class="emotions-popup__container__info-block__emotion-group__title">{{emotionsList[4].emotionsGroupName}}</h2>
+          <div class="emotions-popup__container__info-block__emotion-group__emotions">
+            <div class="emotions-popup__container__info-block__emotion-group__emotions__emotion"
+                 *ngFor="let emotion of emotionsList[4].emotions">
+              <label><input [checked]="selectedEmotions.includes(emotion)" (change)="onSelectEmotion($event, emotion)" type="checkbox">{{emotion}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="emotions-popup__container__info-block__emotion-group">
+          <h2
+            class="emotions-popup__container__info-block__emotion-group__title">{{emotionsList[5].emotionsGroupName}}</h2>
+          <div class="emotions-popup__container__info-block__emotion-group__emotions">
+            <div class="emotions-popup__container__info-block__emotion-group__emotions__emotion"
+                 *ngFor="let emotion of emotionsList[5].emotions">
+              <label><input [checked]="selectedEmotions.includes(emotion)" (change)="onSelectEmotion($event, emotion)" type="checkbox">{{emotion}}</label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <button (click)="onSave()" class="emotions-popup__container__save-button" [textContent]="'Сохранить'"></button>
+    <button mat-raised-button color="primary" [disabled]="!selectedEmotions.length" (click)="onSave()" class="emotions-popup__container__save-button" [textContent]="'Сохранить'"></button>
   </div>
 </div>
