@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {emotionsArray} from "./emotions";
+import {EmotionModel} from "../app/models/emotion.model";
 
 @Component({
   selector: 'emotions-popup',
@@ -10,10 +11,10 @@ export class EmotionsPopupComponent {
 
   @Input() public isVisible: boolean = false;
   @Output() closePopup = new EventEmitter<boolean>();
-  @Output() sendingEmotions = new EventEmitter<Array<string>>();
+  @Output() sendingEmotions = new EventEmitter<EmotionModel[]>();
 
   public emotionsList: Array<any> = emotionsArray;
-  public selectedEmotions: Array<string> = new Array<string>();
+  public selectedEmotions: EmotionModel[] = new Array<EmotionModel>();
 
   constructor() {
   }
@@ -28,18 +29,18 @@ export class EmotionsPopupComponent {
   }
 
   onSelectEmotion(event: Event, emotion: string){
-    if (!this.selectedEmotions.includes(emotion)) {
-      this.selectedEmotions.push(emotion);
+    const newEmotion: EmotionModel = {emotionCode: emotion};
+    if (!this.selectedEmotions.includes(newEmotion)) {
+      this.selectedEmotions.push(newEmotion);
     }
     else {
-      this.selectedEmotions = this.selectedEmotions.filter((element) => element !== emotion);
+      this.selectedEmotions = this.selectedEmotions.filter((element) => element !== newEmotion);
     }
   }
 
-  onSave():void {
+  public onSave(): void {
     this.isVisible = false;
     this.sendingEmotions.emit((this.selectedEmotions));
     this.closePopup.emit(this.isVisible);
-    console.log(this.selectedEmotions)
   }
 }

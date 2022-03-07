@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {UserModel} from "../models/user.model";
+import {HostAddress} from "../constants";
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
   public userName!: string;
 
   constructor(private httpClient: HttpClient) {
-
+    this.token = localStorage.getItem('auth-token') || '';
   }
 
   public setUserName(name: string): void {
@@ -24,14 +25,14 @@ export class AuthService {
   }
 
   public register(user: UserModel): Observable<boolean> {
-    return this.httpClient.post<boolean>('http://localhost:8083/register', {
+    return this.httpClient.post<boolean>(HostAddress + '/register', {
       username: user.name,
       password: user.password
     });
   }
 
   public login(user: UserModel): Observable<{ jwtToken: string }> {
-    return this.httpClient.post<{ jwtToken: string }>('http://localhost:8083/auth', {
+    return this.httpClient.post<{ jwtToken: string }>(HostAddress + '/auth', {
       username: user.name,
       password: user.password
     })
@@ -54,12 +55,8 @@ export class AuthService {
     return this.token;
   }
 
-  public getDecodedId() {
-    return this.jwtHelper.decodeToken(this.token).userId;
-  }
-
   public getDecodedName() {
-    return this.jwtHelper.decodeToken(this.token).name;
+    return this.jwtHelper.decodeToken(this.token).sub;
   }
 
   public isAuthenticated(): boolean {

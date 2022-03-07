@@ -16,6 +16,8 @@ import {CreateRecordComponent} from "../create-record-component/create-record.co
 import {EmotionsPopupComponent} from "../emotions-popup/emotions-popup.component";
 import {AuthService} from "./services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
+import {DataService} from "./services/data.service";
+import {OkDialogComponent} from "./ok-dialog.component/ok-dialog.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import {HttpClientModule} from "@angular/common/http";
     AuthorizationFormComponent,
     RegistrationAndAuthorizationPageComponent,
     CreateRecordComponent,
-    EmotionsPopupComponent
+    EmotionsPopupComponent,
+    OkDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import {HttpClientModule} from "@angular/common/http";
   ],
   providers: [
     AuthService,
+    DataService,
     HttpClientModule
   ],
   bootstrap: [AppComponent]

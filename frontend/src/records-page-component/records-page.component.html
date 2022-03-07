@@ -11,7 +11,8 @@
     <div *ngIf="!isCreateRecordComponentVisible"
          class="create-record-block__button">Внести новую запись
     </div>
-    <create-record-component *ngIf="isCreateRecordComponentVisible">
+    <create-record-component *ngIf="isCreateRecordComponentVisible"
+    (_onRecordSaved)="_onRecordSaved($event)">
     </create-record-component>
   </div>
   <div class="records-settings-block">
