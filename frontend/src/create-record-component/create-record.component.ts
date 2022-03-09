@@ -1,6 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDatepickerInputEvent} from "@angular/material/datepicker";
+import {RecordModel} from "../app/models/record.model";
+import {AuthService} from "../app/services/auth.service";
+import {EmotionModel} from "../app/models/emotion.model";
+import {DataService} from "../app/services/data.service";
+import {MatDialog} from "@angular/material/dialog";
+import {OkDialogComponent} from "../app/ok-dialog.component/ok-dialog.component";
 
 @Component({
   selector: 'create-record-component',
@@ -9,12 +14,25 @@ import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 })
 export class CreateRecordComponent {
   public formGroup!: FormGroup;
-  public date: Date | null = null;
+  public date!: Date;
   public maxDate!: Date;
   public isVisiblePopup: boolean = false;
-  public selectedEmotions!: Array<string>;
+  public selectedEmotions: EmotionModel[] = [];
+  private createdRecord: RecordModel = {
+    date: '',
+    emotions: [],
+    situation: '',
+    thought: '',
+    userName: ''
+  };
 
-  constructor(private formBuilder: FormBuilder) {
+  @Output()
+  public _onRecordSaved: EventEmitter<any> = new EventEmitter<any>();
+
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private dataService: DataService,
+              private dialog: MatDialog) {
     this._createForm();
     this.maxDate = new Date();
   }
@@ -26,20 +44,60 @@ export class CreateRecordComponent {
     })
   }
 
-  public _onDateChange(event: MatDatepickerInputEvent<Date>): void {
+  public _onDateChange(event: any): void {
     this.date = event.value;
   }
 
-  public onPlusButtonClick():void {
+  public onPlusButtonClick(): void {
     this.isVisiblePopup = true;
   }
 
-  public onClosePopup(event: boolean):void {
+  public onClosePopup(event: boolean): void {
     this.isVisiblePopup = event;
   }
 
-  public getSelectedEmotions(event: Array<string>):void {
+  public getSelectedEmotions(event: EmotionModel[]): void {
     this.selectedEmotions = event;
-    console.log(this.selectedEmotions);
+  }
+
+  public _onRecordSave(): void {
+    this.createdRecord.userName = this.authService.getDecodedName();
+    this.createdRecord.date = this.dateToStringFormat(this.date);
+    this.createdRecord.situation = this.formGroup.value.situation;
+    this.createdRecord.thought = this.formGroup.value.thoughts;
+    this.createdRecord.emotions = this.selectedEmotions;
+
+    this.dataService.saveRecord(this.createdRecord)
+      .subscribe(
+        (data) => {
+          this.formGroup.reset();
+          this._onRecordSaved.emit(data);
+          this.showDialog();
+        }
+      );
+  }
+
+  private showDialog(): void {
+    this.dialog.open(OkDialogComponent, {
+      height: '400px',
+      width: '600px',
+      data: {
+        label: "Запись успешно создана",
+        text: "Вы можете найти созданную запись на лавной странице приложения"
+      }
+    });
+  }
+
+  private dateToStringFormat(date: Date): string {
+    let month: string = (date.getMonth() + 1).toString();
+    let day: string = date.getUTCDay().toString();
+    if (month.length == 1) {
+      month = '0' + month;
+    }
+    if (day.length == 1) {
+      day = '0' + day;
+    }
+
+    return date.getFullYear().toString() + '-' + month + '-' + day;
   }
 }

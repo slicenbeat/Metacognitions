@@ -4,7 +4,8 @@ import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
-import {MatDialogModule} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   exports: [
@@ -13,9 +14,13 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
     MatDialogModule
   ],
-  providers: []
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: null },
+  ]
 })
 export class MaterialModule {
 }

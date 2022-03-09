@@ -27,7 +27,7 @@
       <div class="record__info-block__emotions-title">Эмоции:</div>
       <div class="record__info-block__emotions-block">
         <ng-container *ngFor="let emotion of record.emotions">
-          <emotion [emotionName]="emotion"></emotion>
+          <emotion [emotionName]="emotion.emotionCode"></emotion>
         </ng-container>
       </div>
     </div>
