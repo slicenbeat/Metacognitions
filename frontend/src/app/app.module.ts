@@ -18,6 +18,7 @@ import {AuthService} from "./services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {DataService} from "./services/data.service";
 import {OkDialogComponent} from "./ok-dialog.component/ok-dialog.component";
+import {AuthGuard} from "./services/auth-guard";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import {OkDialogComponent} from "./ok-dialog.component/ok-dialog.component";
   providers: [
     AuthService,
     DataService,
-    HttpClientModule
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
