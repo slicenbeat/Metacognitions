@@ -5,10 +5,9 @@
     <input formControlName="login" placeholder="Логин" type="text"/>
     <input formControlName="password" placeholder="Пароль" type="password"/>
     <input formControlName="repeatPassword" placeholder="Повторите пароль" type="password"/>
+    <div class="registration-form__inline-error"
+         *ngIf="!_isPasswordsTheSame() || authErrorMessageVisible">{{errorMessage}}</div>
   </div>
-
-  <div class="registration-form__inline-error"
-  *ngIf="!_isPasswordsTheSame() || authErrorMessageVisible">{{errorMessage}}</div>
 
   <button
     #regButton

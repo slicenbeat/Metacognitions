@@ -31,7 +31,7 @@ export class RegistrationFormComponent {
   }
 
   public _isPasswordsTheSame(): boolean {
-    if (this.formGroup.value.password != this.formGroup.value.repeatPassword) {
+    if (this.formGroup.value.password != this.formGroup.value.repeatPassword && this.formGroup.get('repeatPassword')?.touched) {
       this.errorMessage = 'Пароли не совпадают';
       return false;
     } else return true;
