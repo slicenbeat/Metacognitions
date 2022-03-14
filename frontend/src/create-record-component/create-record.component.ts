@@ -25,7 +25,10 @@ export class CreateRecordComponent {
   };
 
   @Output()
-  public _onRecordSaved: EventEmitter<any> = new EventEmitter<any>();
+  public onRecordSaved: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  public onHideCreateRecordCard: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -39,6 +42,10 @@ export class CreateRecordComponent {
       situation: ['', [Validators.required]],
       thoughts: ['', [Validators.required]]
     })
+  }
+
+  public _hideCreateRecordCard(): void {
+    this.onHideCreateRecordCard.emit();
   }
 
   public _onDateChange(event: any): void {
@@ -68,7 +75,7 @@ export class CreateRecordComponent {
       .subscribe(
         (data) => {
           this.formGroup.reset();
-          this._onRecordSaved.emit(data);
+          this.onRecordSaved.emit(data);
         }
       );
   }

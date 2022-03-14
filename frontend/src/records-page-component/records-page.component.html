@@ -1,7 +1,8 @@
 <div class="header">
   <div class="header__label">Metacognitions</div>
   <div class="header__button"
-  (click)="_logOut()">Выйти</div>
+       (click)="_logOut()">Выйти
+  </div>
 </div>
 
 <div class="main-block">
@@ -12,16 +13,17 @@
          class="create-record-block__button">Внести новую запись
     </div>
     <create-record-component *ngIf="isCreateRecordComponentVisible"
-    (_onRecordSaved)="_onRecordSaved()">
+                             (onRecordSaved)="_onRecordSaved()"
+                             (onHideCreateRecordCard)="_hideCreateRecordCard()">
     </create-record-component>
   </div>
   <div class="records-settings-block">
     <div class="records-settings-block__title">Все записи</div>
   </div>
   <div class="records-settings-block__info">
-      <ng-container *ngFor="let record of records">
-        <record class="records-settings-block__info record"[record]="record"></record>
-      </ng-container>
+    <ng-container *ngFor="let record of records">
+      <record class="records-settings-block__info record" [record]="record"></record>
+    </ng-container>
   </div>
   <div class="pagination">
     <div class="pagination_title">
@@ -33,14 +35,16 @@
            [class.disabled]="pageNumber == 1"
            xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 320 512">
-        <path d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"/>
+        <path
+          d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"/>
       </svg>
       <svg class="icon"
            (click)="_onNextPageClick()"
            [class.disabled]="pageNumber == pagesQuantity"
            xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 320 512">
-        <path d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"/>
+        <path
+          d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"/>
       </svg>
     </div>
   </div>

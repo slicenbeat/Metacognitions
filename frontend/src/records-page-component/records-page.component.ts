@@ -40,6 +40,12 @@ export class RecordsPageComponent implements OnInit{
     );
   }
 
+  public _hideCreateRecordCard(): void {
+    setTimeout(() => {
+      this.isCreateRecordComponentVisible = false;
+    }, 10);
+  }
+
   private prepareRecords(records: any[]): void {
     records.forEach((record) => {
       let newRecord: RecordModel = {
@@ -73,10 +79,12 @@ export class RecordsPageComponent implements OnInit{
   }
 
   public _onNextPageClick(): void {
+    this.isCreateRecordComponentVisible = false;
     this.getRecords(this.pageNumber, 4);
   }
 
   public _onPreviousPageClick(): void {
+    this.isCreateRecordComponentVisible = false;
     this.getRecords(this.pageNumber - 2, 4);
   }
 
