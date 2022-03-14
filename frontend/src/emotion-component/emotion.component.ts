@@ -6,6 +6,5 @@ import {Component, Input} from "@angular/core";
   styleUrls: ['./emotion.component.less']
 })
 export class EmotionComponent {
-  @Input() emotionName: string = 'Радость';
-
+  @Input() emotionName: string = '';
 }

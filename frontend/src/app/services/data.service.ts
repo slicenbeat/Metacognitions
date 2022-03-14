@@ -16,7 +16,8 @@ export class DataService {
   public saveRecord(record: RecordModel): Observable<any> {
     const headers = new HttpHeaders();
     headers.set('Authorization', 'Bearer' + this.authService.getToken());
-    return this.httpClient.post<any>(HostAddress + '/note', {
+
+    return this.httpClient.post<any>(`${HostAddress}/note`, {
         username: record.userName,
         date: record.date,
         pointNotes: [
@@ -35,5 +36,13 @@ export class DataService {
         headers: headers
       });
 
+  }
+
+  public getRecords(page: number, size: number): Observable<any> {
+    const userName: string = this.authService.getDecodedName();
+    const headers = new HttpHeaders();
+    headers.set('Authorization', 'Bearer' + this.authService.getToken());
+
+    return this.httpClient.get<any>(`${HostAddress}/note/${userName}/notes?page=${page}&size=${4}&sort=dateOfCreate,desc`);
   }
 }

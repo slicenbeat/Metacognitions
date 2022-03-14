@@ -4,8 +4,6 @@ import {RecordModel} from "../app/models/record.model";
 import {AuthService} from "../app/services/auth.service";
 import {EmotionModel} from "../app/models/emotion.model";
 import {DataService} from "../app/services/data.service";
-import {MatDialog} from "@angular/material/dialog";
-import {OkDialogComponent} from "../app/ok-dialog.component/ok-dialog.component";
 
 @Component({
   selector: 'create-record-component',
@@ -31,8 +29,7 @@ export class CreateRecordComponent {
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
-              private dataService: DataService,
-              private dialog: MatDialog) {
+              private dataService: DataService) {
     this._createForm();
     this.maxDate = new Date();
   }
@@ -72,25 +69,14 @@ export class CreateRecordComponent {
         (data) => {
           this.formGroup.reset();
           this._onRecordSaved.emit(data);
-          this.showDialog();
         }
       );
   }
 
-  private showDialog(): void {
-    this.dialog.open(OkDialogComponent, {
-      height: '400px',
-      width: '600px',
-      data: {
-        label: "Запись успешно создана",
-        text: "Вы можете найти созданную запись на главной странице приложения"
-      }
-    });
-  }
-
   private dateToStringFormat(date: Date): string {
     let month: string = (date.getMonth() + 1).toString();
-    let day: string = date.getUTCDay().toString();
+    let day: string = date.getDate().toString();
+
     if (month.length == 1) {
       month = '0' + month;
     }

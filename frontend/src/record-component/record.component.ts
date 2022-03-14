@@ -11,11 +11,11 @@ export class RecordComponent {
   public record!: RecordModel;
 
   onEdit():void {
-    console.log('редактируй')
+
   }
 
   onDelete():void {
-    console.log('удаляй')
+
   }
 
 }
