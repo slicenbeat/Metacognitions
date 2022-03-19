@@ -13,12 +13,12 @@ import {RegistrationFormComponent} from "../registration-and-authorization-compo
 import {RegistrationAndAuthorizationPageComponent} from "../registration-and-authorization-components/registration-and-authorization-page/registration-and-authorization-page.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CreateRecordComponent} from "../create-record-component/create-record.component";
-import {EmotionsPopupComponent} from "../emotions-popup/emotions-popup.component";
 import {AuthService} from "./services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {DataService} from "./services/data.service";
 import {OkDialogComponent} from "./ok-dialog.component/ok-dialog.component";
 import {AuthGuard} from "./services/auth-guard";
+import {EmotionsPopupModule} from "../emotions-popup/emotions-popup.module";
 
 @NgModule({
   declarations: [
@@ -29,7 +29,6 @@ import {AuthGuard} from "./services/auth-guard";
     AuthorizationFormComponent,
     RegistrationAndAuthorizationPageComponent,
     CreateRecordComponent,
-    EmotionsPopupComponent,
     OkDialogComponent
   ],
   imports: [
@@ -39,7 +38,8 @@ import {AuthGuard} from "./services/auth-guard";
     MaterialModule,
     RecordModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    EmotionsPopupModule
   ],
   providers: [
     AuthService,

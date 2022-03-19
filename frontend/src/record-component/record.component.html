@@ -1,4 +1,4 @@
-<div class="record">
+<div *ngIf="!isEditMode; else recordEditing" class="record">
   <div class="record__header">
     <div class="record__header__date">
       {{record.date}}
@@ -33,3 +33,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #recordEditing>
+  <record-editing-component [record]="record" (onCloseEditMode)="onSave($event)" (onHideCreateRecordCard)="onCloseEditMode($event)"></record-editing-component>
+</ng-template>

@@ -9,13 +9,22 @@ import {RecordModel} from "../app/models/record.model";
 export class RecordComponent {
   @Input()
   public record!: RecordModel;
+  public isEditMode: boolean = false;
 
   onEdit():void {
-
+    this.isEditMode = true;
   }
 
   onDelete():void {
 
+  }
+
+  onSave(event: boolean) {
+    this.isEditMode = event;
+  }
+
+  onCloseEditMode(event: any) {
+    this.isEditMode = false;
   }
 
 }

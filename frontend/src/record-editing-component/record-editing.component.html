@@ -1,0 +1,63 @@
+<form [formGroup]="formGroup" class="editing-form">
+  <div class="header">
+    <div class="header-text">Редактировать запись</div>
+    <div class="header-close-button"
+         (click)="_hideEditingRecordCard()">Закрыть
+    </div>
+  </div>
+
+  <div class="record__info-block">
+    <div class="record__info-block__date">
+      <div class="record__info-block__date-title">Дата:</div>
+      <mat-form-field appearance="outline" class="date-form-field">
+        <mat-label>Выберите дату</mat-label>
+        <input matInput [disabled]="true" [matDatepicker]="picker" [max]="maxDate" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="record__info-block__situation">
+      <div class="record__info-block__situation-title">Ситуация:</div>
+      <mat-form-field appearance="outline" class="situation-form-field">
+        <textarea matInput placeholder="Опишите ситуацию" formControlName="situation"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="record__info-block__thoughts">
+      <div class="record__info-block__thoughts-title">Мысли:</div>
+      <mat-form-field appearance="outline" class="thoughts-form-field">
+        <textarea matInput placeholder="Введите свои мысли" type=text formControlName="thoughts"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="record__info-block__emotions">
+      <div class="record__info-block__emotions-title">Эмоции:</div>
+      <svg (click)="onPlusButtonClick()" class="plus-icon" width="45" height="45" viewBox="0 0 45 45" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M22.5 0C10.092 0 0 10.092 0 22.5C0 34.908 10.092 45 22.5 45C34.908 45 45 34.908 45 22.5C45 10.092 34.908 0 22.5 0ZM22.5 42C11.748 42 3 33.252 3 22.5C3 11.748 11.748 3 22.5 3C33.252 3 42 11.748 42 22.5C42 33.252 33.252 42 22.5 42Z"
+          fill="#919ACC"/>
+        <path d="M24 10.5H21V21H10.5V24H21V34.5H24V24H34.5V21H24V10.5Z" fill="#919ACC"/>
+      </svg>
+    </div>
+
+    <div class="record__emotions-block">
+      <ng-container *ngFor="let emotion of selectedEmotions">
+        <emotion [emotionName]="emotion.emotionCode"></emotion>
+      </ng-container>
+    </div>
+
+  </div>
+
+  <button
+    class="save-button"
+    mat-raised-button color="primary"
+    [disabled]="!formGroup.valid || !selectedEmotions.length"
+    [textContent]="'Сохранить изменения'"
+    (click)="onSave()">
+  </button>
+</form>
+
+<emotions-popup [isVisible]="isVisiblePopup" (closePopup)="onClosePopup($event)"
+                (sendingEmotions)="getSelectedEmotions($event)"></emotions-popup>
