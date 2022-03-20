@@ -5,21 +5,28 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../app/modules/material.module";
 import {EmotionComponent} from "../emotion-component/emotion.component";
 import {RecordComponent} from "./record.component";
+import {RecordEditingComponent} from "../record-editing-component/record-editing.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import {EmotionsPopupModule} from "../emotions-popup/emotions-popup.module";
 
 @NgModule({
   declarations: [
     EmotionComponent,
-    RecordComponent
+    RecordComponent,
+    RecordEditingComponent
   ],
   exports: [
     EmotionComponent,
-    RecordComponent
+    RecordComponent,
+    RecordEditingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    EmotionsPopupModule
   ]
 })
 export class RecordModule {
