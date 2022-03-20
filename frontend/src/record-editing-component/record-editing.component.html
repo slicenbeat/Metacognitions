@@ -1,9 +1,6 @@
 <form [formGroup]="formGroup" class="editing-form">
   <div class="header">
     <div class="header-text">Редактировать запись</div>
-    <div class="header-close-button"
-         (click)="_hideEditingRecordCard()">Закрыть
-    </div>
   </div>
 
   <div class="record__info-block">
@@ -11,7 +8,7 @@
       <div class="record__info-block__date-title">Дата:</div>
       <mat-form-field appearance="outline" class="date-form-field">
         <mat-label>Выберите дату</mat-label>
-        <input matInput [disabled]="true" [matDatepicker]="picker" [max]="maxDate" formControlName="date">
+        <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker disabled="false"></mat-datepicker>
       </mat-form-field>
@@ -50,14 +47,22 @@
 
   </div>
 
-  <button
-    class="save-button"
-    mat-raised-button color="primary"
-    [disabled]="!formGroup.valid || !selectedEmotions.length"
-    [textContent]="'Сохранить изменения'"
-    (click)="onSave()">
-  </button>
+  <div class="buttons-block">
+    <button
+      class="cancel-button"
+      mat-raised-button color="primary"
+      [textContent]="'Отменить'"
+      (click)="_hideEditingRecordCard()">
+    </button>
+    <button
+      class="save-button"
+      mat-raised-button color="primary"
+      [disabled]="!formGroup.valid || !selectedEmotions.length"
+      [textContent]="'Сохранить запись'"
+      (click)="onSave()">
+    </button>
+  </div>
 </form>
 
 <emotions-popup [isVisible]="isVisiblePopup" (closePopup)="onClosePopup($event)"
-                (sendingEmotions)="getSelectedEmotions($event)"></emotions-popup>
+                (sendingEmotions)="getSelectedEmotions($event)" [emotionsFromUserRecord]="record.emotions"></emotions-popup>

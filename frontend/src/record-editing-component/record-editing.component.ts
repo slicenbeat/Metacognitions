@@ -36,7 +36,7 @@ export class RecordEditingComponent {
     this.formGroup = this.formBuilder.group({
       situation: [this.record.situation, [Validators.required]],
       thoughts: [this.record.thought, [Validators.required]],
-      date: [new Date(this.record.date)]
+      date: [{value: new Date(this.record.date), disabled: true}]
     })
   }
 
@@ -59,6 +59,4 @@ export class RecordEditingComponent {
   public _hideEditingRecordCard(): void {
     this.onHideCreateRecordCard.emit();
   }
-
-
 }

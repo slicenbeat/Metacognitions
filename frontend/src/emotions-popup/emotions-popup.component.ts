@@ -10,17 +10,22 @@ import {EmotionModel} from "../app/models/emotion.model";
 export class EmotionsPopupComponent {
 
   @Input() public isVisible: boolean = false;
+  @Input() emotionsFromUserRecord: Array<EmotionModel> = new Array<EmotionModel>();
   @Output() closePopup = new EventEmitter<boolean>();
   @Output() sendingEmotions = new EventEmitter<EmotionModel[]>();
 
   public emotionsList: Array<any> = emotionsArray;
   public selectedEmotions: EmotionModel[] = new Array<EmotionModel>();
+  public selectedEmotionsName: Array<string> = new Array<string>();
 
   constructor() {
   }
 
   ngOnInit():void {
-
+    if (this.emotionsFromUserRecord) {
+      this.selectedEmotions = this.emotionsFromUserRecord;
+      this.selectedEmotionsName = this.emotionsFromUserRecord.map(emotion => emotion.emotionCode);
+    }
   }
 
   onClose():void {
@@ -30,16 +35,18 @@ export class EmotionsPopupComponent {
 
   onSelectEmotion(event: Event, emotion: string){
     const newEmotion: EmotionModel = {emotionCode: emotion};
-    if (!this.selectedEmotions.includes(newEmotion)) {
+    if (!this.selectedEmotionsName.includes(newEmotion.emotionCode)) {
       this.selectedEmotions.push(newEmotion);
     }
     else {
-      this.selectedEmotions = this.selectedEmotions.filter((element) => element !== newEmotion);
+      this.selectedEmotionsName = this.selectedEmotionsName.filter((element: string) => element !== newEmotion.emotionCode);
+      this.selectedEmotions = this.selectedEmotions.filter((element) => element.emotionCode !== newEmotion.emotionCode);
     }
   }
 
   public onSave(): void {
     this.isVisible = false;
+    this.selectedEmotionsName = this.selectedEmotions.map(emotion => emotion.emotionCode);
     this.sendingEmotions.emit((this.selectedEmotions));
     this.closePopup.emit(this.isVisible);
   }

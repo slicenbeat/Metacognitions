@@ -1,9 +1,6 @@
 <form [formGroup]="formGroup">
   <div class="header">
     <div class="header-text">Создать новую запись</div>
-    <div class="header-close-button"
-         (click)="_hideCreateRecordCard()">Свернуть
-    </div>
   </div>
 
   <div class="record__info-block">
@@ -50,13 +47,21 @@
 
   </div>
 
-  <button
-    class="save-button"
-    mat-raised-button color="primary"
-    [disabled]="!formGroup.valid || !date || !selectedEmotions.length"
-    [textContent]="'Сохранить запись'"
-    (click)="_onRecordSave()">
-  </button>
+  <div class="buttons-block">
+    <button
+      class="cancel-button"
+      mat-raised-button color="primary"
+      [textContent]="'Отменить'"
+      (click)="_hideCreateRecordCard()">
+    </button>
+    <button
+      class="save-button"
+      mat-raised-button color="primary"
+      [disabled]="!formGroup.valid || !date || !selectedEmotions.length"
+      [textContent]="'Сохранить запись'"
+      (click)="_onRecordSave()">
+    </button>
+  </div>
 </form>
 
 <emotions-popup [isVisible]="isVisiblePopup" (closePopup)="onClosePopup($event)"
