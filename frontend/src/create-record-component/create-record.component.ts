@@ -21,7 +21,12 @@ export class CreateRecordComponent {
     emotions: [],
     situation: '',
     thought: '',
-    userName: ''
+    userName: '',
+    id: 0,
+    situationId: 0,
+    situationNoteId: 0,
+    thoughtId: 0,
+    thoughtNoteId: 0
   };
 
   @Output()

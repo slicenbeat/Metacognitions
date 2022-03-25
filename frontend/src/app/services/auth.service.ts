@@ -31,16 +31,16 @@ export class AuthService {
     });
   }
 
-  public login(user: UserModel): Observable<{ jwtToken: string }> {
-    return this.httpClient.post<{ jwtToken: string }>(HostAddress + '/auth', {
+  public login(user: UserModel): Observable<{ data: any }> {
+    return this.httpClient.post<{ data: any }>(HostAddress + '/auth', {
       username: user.name,
       password: user.password
     })
       .pipe(
         tap(
-          ({jwtToken}) => {
-            localStorage.setItem('auth-token', jwtToken);
-            this.setToken(jwtToken);
+          ({data}) => {
+            localStorage.setItem('auth-token', data.jwtToken);
+            this.setToken(data.jwtToken);
             this.userName = this.getDecodedName();
           }
         )

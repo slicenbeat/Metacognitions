@@ -22,7 +22,7 @@
   </div>
   <div class="records-settings-block__info">
     <ng-container *ngFor="let record of records">
-      <record class="records-settings-block__info record" [record]="record"></record>
+      <record class="records-settings-block__info record" [record]="record" (deleteFlag)="onRecordDelete($event)"></record>
     </ng-container>
   </div>
   <div class="pagination">

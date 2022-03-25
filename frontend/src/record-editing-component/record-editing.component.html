@@ -8,7 +8,7 @@
       <div class="record__info-block__date-title">Дата:</div>
       <mat-form-field appearance="outline" class="date-form-field">
         <mat-label>Выберите дату</mat-label>
-        <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="date">
+        <input matInput [disabled]="true" [matDatepicker]="picker" [max]="maxDate" formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker disabled="false"></mat-datepicker>
       </mat-form-field>
@@ -24,7 +24,7 @@
     <div class="record__info-block__thoughts">
       <div class="record__info-block__thoughts-title">Мысли:</div>
       <mat-form-field appearance="outline" class="thoughts-form-field">
-        <textarea matInput placeholder="Введите свои мысли" type=text formControlName="thoughts"></textarea>
+        <textarea matInput placeholder="Введите свои мысли" type=text formControlName="thought"></textarea>
       </mat-form-field>
     </div>
 
