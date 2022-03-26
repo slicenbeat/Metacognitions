@@ -25,7 +25,7 @@
       <record class="records-settings-block__info record" [record]="record" (deleteFlag)="onRecordDelete($event)"></record>
     </ng-container>
   </div>
-  <div class="pagination">
+  <div class="pagination" *ngIf="records.length > 1">
     <div class="pagination_title">
       Страница {{pageNumber}} из {{pagesQuantity}}
     </div>
