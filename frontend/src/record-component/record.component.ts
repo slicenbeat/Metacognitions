@@ -28,10 +28,17 @@ export class RecordComponent {
 
   onSave(event: boolean) {
     this.isEditMode = event;
+    this.record.date = this.formatDate(this.record.date);
   }
 
   onCloseEditMode(event: any) {
     this.isEditMode = false;
+  }
+
+  public formatDate(date: string): string {
+    let year = "." + date[0] + date[1] + date[2] + date[3]
+    let str1 = date.replace(/-/g, '.').replace(/\d\d\d\d./, '');
+    return str1 + year
   }
 
 }
