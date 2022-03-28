@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EmotionModel} from "../app/models/emotion.model";
 import {RecordModel} from "../app/models/record.model";
+import {DataService} from "../app/services/data.service";
 
 @Component({
   selector: 'record-editing-component',
@@ -23,7 +24,7 @@ export class RecordEditingComponent {
   @Output()
   private onHideCreateRecordCard: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private dataService: DataService) {
   }
 
   ngOnInit():void {
@@ -35,8 +36,8 @@ export class RecordEditingComponent {
   private _createForm(): void {
     this.formGroup = this.formBuilder.group({
       situation: [this.record.situation, [Validators.required]],
-      thoughts: [this.record.thought, [Validators.required]],
-      date: [{value: new Date(this.record.date), disabled: true}]
+      thought: [this.record.thought, [Validators.required]],
+      date: [new Date(this.record.date)]
     })
   }
 
@@ -53,10 +54,29 @@ export class RecordEditingComponent {
   }
 
   public onSave() {
+    this.record.date = this.dateToStringFormat(this.formGroup.get('date')?.value);
+    this.record.thought = this.formGroup.value.thought;
+    this.record.situation = this.formGroup.value.situation;
+    this.record.emotions = this.selectedEmotions;
+    this.dataService.editRecord(this.record).subscribe();
     this.onCloseEditMode.emit(false);
   }
 
   public _hideEditingRecordCard(): void {
     this.onHideCreateRecordCard.emit();
+  }
+
+  private dateToStringFormat(date: Date) {
+    let month: string = (date.getMonth() + 1).toString();
+    let day: string = date.getDate().toString();
+
+    if (month.length == 1) {
+      month = '0' + month;
+    }
+    if (day.length == 1) {
+      day = '0' + day;
+    }
+
+    return date.getFullYear().toString() + '-' + month + '-' + day;
   }
 }

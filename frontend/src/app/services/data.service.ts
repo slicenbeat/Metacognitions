@@ -45,4 +45,37 @@ export class DataService {
 
     return this.httpClient.get<any>(`${HostAddress}/note/${userName}/notes?page=${page}&size=${4}&sort=dateOfCreate,desc`);
   }
+
+  public editRecord(record: RecordModel): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Authorization', 'Bearer' + this.authService.getToken());
+
+    return this.httpClient.put<any>(`${HostAddress}/note`, {
+        id: record.id,
+        username: record.userName,
+        date: record.date,
+        pointNotes: [
+          {
+            noteId: record.situationNoteId,
+            id: record.situationId,
+            content: record.situation,
+            typePointNote: typesPointNotes.situationCode
+          },
+          {
+            noteId: record.thoughtNoteId,
+            id: record.thoughtId,
+            content: record.thought,
+            typePointNote: typesPointNotes.thoughtCode
+          }
+        ],
+        emotionNotes: record.emotions
+      },
+      {
+        headers: headers
+      });
+  }
+
+  public deleteRecord(record: RecordModel): Observable<any> {
+    return this.httpClient.delete<any>(`${HostAddress}/note/${record.id}`);
+  }
 }

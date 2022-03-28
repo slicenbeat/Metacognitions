@@ -1,5 +1,6 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {RecordModel} from "../app/models/record.model";
+import {DataService} from "../app/services/data.service";
 
 @Component({
   selector: 'record',
@@ -11,12 +12,18 @@ export class RecordComponent {
   public record!: RecordModel;
   public isEditMode: boolean = false;
 
+  @Output()
+  public deleteFlag: EventEmitter<any> = new EventEmitter<any>();
+
+  constructor(private dataService: DataService) {
+  }
+
   onEdit():void {
     this.isEditMode = true;
   }
 
   onDelete():void {
-
+    this.dataService.deleteRecord(this.record).subscribe(() => this.deleteFlag.emit());
   }
 
   onSave(event: boolean) {
