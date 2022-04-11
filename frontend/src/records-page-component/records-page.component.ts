@@ -14,6 +14,9 @@ import {MatDialog} from "@angular/material/dialog";
 export class RecordsPageComponent implements OnInit{
   public isCreateRecordComponentVisible: boolean = false;
   public currentPageNumber!: number;
+  public maxDate!: Date;
+  public startDate!: string;
+  public endDate!: string;
 
   public pagesQuantity!: number;
   public pageNumber: number = 1;
@@ -23,6 +26,7 @@ export class RecordsPageComponent implements OnInit{
   constructor(private router: Router,
               private dataService: DataService,
               private dialog: MatDialog) {
+    this.maxDate = new Date();
   }
 
   public ngOnInit(): void {
@@ -127,5 +131,41 @@ export class RecordsPageComponent implements OnInit{
     let year = "." + date[0] + date[1] + date[2] + date[3]
     let str1 = date.replace(/-/g, '.').replace(/\d\d\d\d./, '');
     return str1 + year
+  }
+
+  private dateToStringFormat(date: Date): string {
+    let month: string = (date.getMonth() + 1).toString();
+    let day: string = date.getDate().toString();
+
+    if (month.length == 1) {
+      month = '0' + month;
+    }
+    if (day.length == 1) {
+      day = '0' + day;
+    }
+
+    return date.getFullYear().toString() + '-' + month + '-' + day;
+  }
+
+  _onStartDateChange(event: any):void {
+    if (event.value) {
+      this.startDate = this.dateToStringFormat(event.value);
+    }
+  }
+
+  _onEndDateChange(event: any):void {
+    if (event.value) {
+      this.endDate = this.dateToStringFormat(event.value);
+      this.records = [];
+      this.dataService.getRecordsByDates(this.startDate, this.endDate, 0,4).subscribe(
+        (data) => {
+          if (data.success) {
+            this.pageNumber = ++data.data.numPage;
+            this.pagesQuantity = data.data.countPages;
+            this.prepareRecords(data.data.notes);
+          }
+        }
+      );
+    }
   }
 }

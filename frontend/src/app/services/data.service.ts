@@ -78,4 +78,9 @@ export class DataService {
   public deleteRecord(record: RecordModel): Observable<any> {
     return this.httpClient.delete<any>(`${HostAddress}/note/${record.id}`);
   }
+
+  public getRecordsByDates(dateStart: string, dateEnd: string, page: number, size: number): Observable<any> {
+    const userName: string = this.authService.getDecodedName();
+    return this.httpClient.get<any>(`${HostAddress}/note/${userName}/notes/filter?start=${dateStart}&end=${dateEnd}&page=${page}&size=${size}&sort=dateOfCreate,desc`)
+  }
 }

@@ -18,7 +18,16 @@
     </create-record-component>
   </div>
   <div class="records-settings-block">
-    <div class="records-settings-block__title">Все записи</div>
+    <div class="records-settings-block__title">Все записи:</div>
+    <mat-form-field appearance="outline" class="date-form-field">
+      <mat-label>Выберите даты</mat-label>
+      <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+        <input matStartDate (dateChange)="_onStartDateChange($event)" disabled>
+        <input matEndDate (dateChange)="_onEndDateChange($event)" disabled>
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+    </mat-form-field>
   </div>
   <div class="records-settings-block__info">
     <ng-container *ngFor="let record of records">
