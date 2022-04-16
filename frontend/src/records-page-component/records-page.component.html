@@ -20,7 +20,7 @@
   <div class="records-settings-block">
     <div class="records-settings-block__title">Все записи:</div>
     <mat-form-field appearance="outline" class="date-form-field">
-      <mat-label>Выберите даты</mat-label>
+      <mat-label *ngIf="!(startDate || endDate)">Выберите даты</mat-label>
       <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
         <input matStartDate (dateChange)="_onStartDateChange($event)" disabled>
         <input matEndDate (dateChange)="_onEndDateChange($event)" disabled>
