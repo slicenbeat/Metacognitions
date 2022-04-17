@@ -23,6 +23,10 @@ export class RecordsPageComponent implements OnInit{
 
   public records: RecordModel[] = [];
 
+  public itemsPerPageCounts = [2, 4, 6, 10];
+
+  public itemsPerPage: number = 4;
+
   constructor(private router: Router,
               private dataService: DataService,
               private dialog: MatDialog) {
@@ -30,7 +34,7 @@ export class RecordsPageComponent implements OnInit{
   }
 
   public ngOnInit(): void {
-    this.getRecords(0, 4);
+    this.getRecords(0, this.itemsPerPage);
   }
 
   private getRecords(page: number, size: number): void {
@@ -89,22 +93,22 @@ export class RecordsPageComponent implements OnInit{
   public _onRecordSaved(): void {
     this.isCreateRecordComponentVisible = false;
     this.showDialog("Запись успешно создана", "Вы можете найти созданную запись на главной странице приложения");
-    this.getRecords(0, 4);
+    this.getRecords(0, this.itemsPerPage);
   }
 
   public onRecordDelete(event: any): void {
     this.showDialog("Запись успешно удалена", "")
-    this.getRecords(0, 4);
+    this.getRecords(0, this.itemsPerPage);
   }
 
   public _onNextPageClick(): void {
     this.isCreateRecordComponentVisible = false;
-    this.getRecords(this.pageNumber, 4);
+    this.getRecords(this.pageNumber, this.itemsPerPage);
   }
 
   public _onPreviousPageClick(): void {
     this.isCreateRecordComponentVisible = false;
-    this.getRecords(this.pageNumber - 2, 4);
+    this.getRecords(this.pageNumber - 2, this.itemsPerPage);
   }
 
   public _showCreateRecordComponent(): void {
@@ -157,7 +161,7 @@ export class RecordsPageComponent implements OnInit{
     if (event.value) {
       this.endDate = this.dateToStringFormat(event.value);
       this.records = [];
-      this.dataService.getRecordsByDates(this.startDate, this.endDate, 0,4).subscribe(
+      this.dataService.getRecordsByDates(this.startDate, this.endDate, 0, this.itemsPerPage).subscribe(
         (data) => {
           if (data.success) {
             this.pageNumber = ++data.data.numPage;
@@ -167,5 +171,9 @@ export class RecordsPageComponent implements OnInit{
         }
       );
     }
+  }
+
+  public _onItemsPerPageChange(): void {
+    this.getRecords(this.currentPageNumber, this.itemsPerPage);
   }
 }

@@ -43,7 +43,7 @@ export class DataService {
     const headers = new HttpHeaders();
     headers.set('Authorization', 'Bearer' + this.authService.getToken());
 
-    return this.httpClient.get<any>(`${HostAddress}/note/${userName}/notes?page=${page}&size=${4}&sort=dateOfCreate,desc`);
+    return this.httpClient.get<any>(`${HostAddress}/note/${userName}/notes?page=${page}&size=${size}&sort=dateOfCreate,desc`);
   }
 
   public editRecord(record: RecordModel): Observable<any> {
