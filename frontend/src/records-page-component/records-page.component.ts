@@ -13,7 +13,6 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class RecordsPageComponent implements OnInit{
   public isCreateRecordComponentVisible: boolean = false;
-  public currentPageNumber!: number;
   public maxDate!: Date;
   public startDate!: string;
   public endDate!: string;
@@ -93,12 +92,22 @@ export class RecordsPageComponent implements OnInit{
   public _onRecordSaved(): void {
     this.isCreateRecordComponentVisible = false;
     this.showDialog("Запись успешно создана", "Вы можете найти созданную запись на главной странице приложения");
-    this.getRecords(0, this.itemsPerPage);
+    if (!(this.startDate || this.endDate)) {
+      this.getRecords(0, this.itemsPerPage);
+    }
+    else {
+      this._getRecordsByDates();
+    }
   }
 
   public onRecordDelete(event: any): void {
     this.showDialog("Запись успешно удалена", "")
-    this.getRecords(0, this.itemsPerPage);
+    if (!(this.startDate || this.endDate)) {
+      this.getRecords(0, this.itemsPerPage);
+    }
+    else {
+      this._getRecordsByDates();
+    }
   }
 
   public _onNextPageClick(): void {
@@ -160,20 +169,33 @@ export class RecordsPageComponent implements OnInit{
   _onEndDateChange(event: any):void {
     if (event.value) {
       this.endDate = this.dateToStringFormat(event.value);
-      this.records = [];
-      this.dataService.getRecordsByDates(this.startDate, this.endDate, 0, this.itemsPerPage).subscribe(
-        (data) => {
-          if (data.success) {
-            this.pageNumber = ++data.data.numPage;
-            this.pagesQuantity = data.data.countPages;
-            this.prepareRecords(data.data.notes);
-          }
-        }
-      );
+      this._getRecordsByDates();
     }
   }
 
   public _onItemsPerPageChange(): void {
-    this.getRecords(this.currentPageNumber, this.itemsPerPage);
+    if (!(this.startDate || this.endDate)) {
+      this.getRecords(0, this.itemsPerPage);
+    }
+    else {
+      this._getRecordsByDates();
+    }
+  }
+
+  public _getRecordsByDates() {
+    this.dataService.getRecordsByDates(this.startDate, this.endDate, 0, this.itemsPerPage).subscribe(
+      (data) => {
+        if (data.success) {
+          this.records = [];
+          this.pageNumber = ++data.data.numPage;
+          this.pagesQuantity = data.data.countPages;
+          this.prepareRecords(data.data.notes);
+        }
+        else {
+          this.pageNumber = 1;
+          this.pagesQuantity = 1;
+        }
+      }
+    );
   }
 }
